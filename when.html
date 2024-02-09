@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CodeCartel.codes</title>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="files/styles.css">
 </head>
 <body>
 <img src="image/codecartelcodes_logo.png">
@@ -18,11 +18,24 @@
 </div>
 <div class="table-container">
 <table class="custom-table"><tr><td>
-    
+<br>
+The CodeCartel works asynchronously but also has scheduled sessions.
 
-When    
- 
-    
+<p>The next scheduled online session is on:</p>
+<ul>
+<li><div id="meetingTime"></div></li>
+<li><div id="countdown"></div></li>
+</ul>
+
+<script src="files/countdown_timer.js"></script>
+<script>
+updateCountdown();
+displayNextMeetingLocalTime();
+</script>
+
+The sessions are for Q&A, team building, brainstorming, pair-programming, free mentorship, and fun.<br><br>
+
+<p>See <a href="where.html">Where</a> we meet.</p>
 </td></tr></table>
 </main>
 </body>
