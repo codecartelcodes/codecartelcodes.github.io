@@ -5,16 +5,26 @@ function calculateTimeRemaining() {
   // Use Eastern Standard Time (EST) as the default timezone
   const targetTimezoneOffset = -5;
   // Set the meeting days to Monday, Wednesday, Friday
-  const targetDays = [1, 3, 5]; 
+  const targetDays = [1, 3, 5];
   // Set the meeting time to 8 PM on each meeting day
-  const targetHour = 20; 
+  const targetHour = 20;
 
   // Adjust target time to the visitor's timezone
   const targetTime = new Date();
   targetTime.setUTCHours(targetHour - targetTimezoneOffset, 0, 0, 0);
 
-  // Calculate time difference
-  const timeDifference = targetTime - now;
+  // Find the next meeting day
+  let nextMeetingDay = targetDays.find(day => day >= now.getUTCDay());
+  if (!nextMeetingDay) {
+    nextMeetingDay = targetDays[0]; // If no future meeting day this week, use the first meeting day of the next week
+  }
+
+  // Calculate time difference for the next meeting day
+  const nextMeetingDate = new Date(now);
+  nextMeetingDate.setUTCDate(now.getUTCDate() + (nextMeetingDay - now.getUTCDay() + 7) % 7);
+  nextMeetingDate.setUTCHours(targetHour - targetTimezoneOffset, 0, 0, 0);
+
+  const timeDifference = nextMeetingDate - now;
 
   // Calculate days, hours, and minutes
   const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
