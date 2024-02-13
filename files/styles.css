@@ -4,14 +4,13 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     font-family: 'Courier New', monospace;
-    background-color: #0e0e0e;
+    background-color: #000000;
     color: #00ff00;
     margin: 0;
     padding: 0;
     overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
     flex-direction: column; 
     height: 100vh;
@@ -56,9 +55,9 @@ footer {
 
 .tabs {
     display: flex;
-    flex-direction: row; 
     justify-content: space-evenly;
     margin-bottom: 15px;
+    flex-direction: column; 
 }
 
 .button {
@@ -87,24 +86,7 @@ footer {
     background-color: rgba(244, 153, 61, 0.6);
 }
 
-/* Media query for smaller screens */
-@media screen and (max-width: 768px) {
-    body {
-        max-width: 90%;
-        justify-content: top;
-        align-items: flex-start;
-    }
-    
-    /* Vertical tabs for smaller screens */
-    .tabs {
-        flex-direction: column; 
-    }
 
-    /* Added margin for separation between vertical tabs */
-    .tab {
-        margin-bottom: 10px; 
-    }
-}
 
 /* Add table styles */
 .table-container {
@@ -139,4 +121,19 @@ footer {
 
   text-align: left;
   caption-side: bottom;
+}
+
+/* Media query for smaller screens */
+@media screen and (min-width: 768px) {
+    body {
+        max-width: 95%;
+        justify-content: center;
+        align-items: flex-start;
+        align-items: center;
+    }
+    
+    /* Vertical tabs for smaller screens */
+    .tabs {
+        flex-direction: row; 
+    }
 }
