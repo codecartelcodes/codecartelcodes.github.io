@@ -86,11 +86,8 @@ footer {
     background-color: rgba(244, 153, 61, 0.6);
 }
 
-
-
 /* Add table styles */
 .table-container {
-    height: 300px;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     overflow: auto;
@@ -118,7 +115,6 @@ footer {
 }
 
 .custom-table caption {
-
   text-align: left;
   caption-side: bottom;
 }
