@@ -89,7 +89,7 @@ footer {
 
 /* Media query for smaller screens */
 @media screen and (max-width: 768px) {
-    main {
+    body {
         max-width: 90%;
         justify-content: top;
         align-items: flex-start;
