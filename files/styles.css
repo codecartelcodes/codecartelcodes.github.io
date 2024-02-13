@@ -13,6 +13,7 @@ body {
     margin: 0;
     overflow: hidden;
     padding: 0;
+    width: 100%;
 }
 
 a:link {
@@ -83,6 +84,10 @@ footer {
 
 .button:hover {
     background-color: rgba(244, 153, 61, 0.6);
+}
+
+.logo-container {
+    order: -1; /* Place the logo container first in the display order */
 }
 
 /* Add table styles */
