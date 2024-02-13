@@ -1,5 +1,4 @@
 body {
-    align-items: center;
     background-color: #000000;
     background-image: url('../image/laptop.jpg'); 
     background-position: center;
@@ -43,7 +42,7 @@ main {
     padding: 20px;
     border: 2px solid #000000;
     border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.6);
     max-width: 700px;
     width: 700px;
 }
@@ -74,12 +73,13 @@ footer {
 }
 
 .nav-button {
+    background-color: rgba(0, 0, 0, 0.6);
     text-decoration: none;
     color: #00ff00;
 }
 
 .active-button {
-    background-color: rgba(255, 60, 0, 0.3);
+    background-color: rgba(255, 60, 0, 0.6);
 }
 
 .button:hover {
@@ -124,11 +124,13 @@ footer {
 }
 
 /* Media query for smaller screens */
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 700px) {
     body {
         align-items: center;
         max-width: 85%;
-        justify-content: start;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
     }
  
     /* Vertical tabs for smaller screens */
