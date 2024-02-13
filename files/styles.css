@@ -44,8 +44,8 @@ main {
     border: 2px solid #000000;
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.8);
-    max-width: 720px;
-    width: 720px;
+    max-width: 700px;
+    width: 700px;
 }
 
 footer {
@@ -124,11 +124,11 @@ footer {
 }
 
 /* Media query for smaller screens */
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
     body {
         align-items: center;
-        max-width: 90%;
-        justify-content: center;
+        max-width: 85%;
+        justify-content: start;
     }
  
     /* Vertical tabs for smaller screens */
