@@ -90,7 +90,8 @@ footer {
 /* Media query for smaller screens */
 @media screen and (max-width: 600px) {
     main {
-        max-width: 90%; 
+        max-width: 90%;
+        justify-content: top;
     }
     
     /* Vertical tabs for smaller screens */
