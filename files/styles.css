@@ -10,9 +10,8 @@ body {
     font-family: 'Courier New', monospace;
     height: 100vh;
     margin: 0;
-    overflow: hidden;
+    overflow: scroll;
     padding: 0;
-    width: 100%;
 }
 
 a:link {
@@ -30,7 +29,7 @@ a:hover {
 }
 
 img {
-    max-width: 100%;
+    max-width: 95%;
     height: auto;
     border-radius: 10px;
     margin-top: 0;
@@ -38,13 +37,11 @@ img {
 }
 
 main {
-    text-align: center;
-    padding: 20px;
+    max-width: 95%;
+    padding: 5px;
     border: 2px solid #000000;
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.6);
-    max-width: 700px;
-    width: 700px;
 }
 
 footer {
@@ -56,12 +53,13 @@ footer {
     display: flex;
     justify-content: space-evenly;
     margin-bottom: 15px;
-    flex-direction: column; 
+    flex-direction: column;
+    width: 100%;
 }
 
 .button {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px;
     text-align: center;
     text-decoration: none;
     border: 1px solid red;
@@ -70,6 +68,7 @@ footer {
     transition: background-color 0.3s ease;
     color: #fff;
     margin-bottom: 0; 
+
 }
 
 .nav-button {
@@ -79,7 +78,7 @@ footer {
 }
 
 .active-button {
-    background-color: rgba(255, 60, 0, 0.6);
+    background-color: rgba(255, 60, 0, 0.3);
 }
 
 .button:hover {
@@ -87,25 +86,22 @@ footer {
 }
 
 .logo-container {
-    order: -1; /* Place the logo container first in the display order */
-}
-
-/* Add table styles */
-.table-container {
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    overflow: auto;
-    margin-top: 20px; 
-    margin: 0 auto;  
-    border-radius: 20px;
-    flex: 1;
+    order: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .custom-table {
-    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
     border-collapse: collapse;
-    background-color: black;
+    border-radius: 20px;
     color: #00ff00;
+    flex: 1;
+    margin: 0 auto;  
+    overflow: scroll;
+    padding: 20px;
+    max-width: 700px;
 }
 
 .custom-table td, .custom-table th {
