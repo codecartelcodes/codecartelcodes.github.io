@@ -59,6 +59,7 @@ footer {
 
 .button {
     display: inline-block;
+    min-width: 75px;
     padding: 10px;
     text-align: center;
     text-decoration: none;
@@ -67,8 +68,6 @@ footer {
     border-radius: 5px;
     transition: background-color 0.3s ease;
     color: #fff;
-    margin-bottom: 0; 
-
 }
 
 .nav-button {
