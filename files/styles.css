@@ -44,11 +44,6 @@ main {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-}
-
 .tabs {
     display: flex;
     justify-content: space-evenly;
@@ -101,6 +96,7 @@ footer {
     overflow: scroll;
     padding: 20px;
     max-width: 700px;
+    text-align: justify;
 }
 
 .custom-table td, .custom-table th {
