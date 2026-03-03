@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Using small local models with OpenHands</title>
+    <style>
+        body {
+            background-color: #000000;
+            background-image: url('../image/laptop.jpg'); 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: #00ff00;
+            display: flex;
+            flex-direction: column; 
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            height: auto;
+            margin: 0;
+            overflow: auto;
+            padding: 20px;
+        }
+
+        a:link {
+            color: #00ff00;
+        }
+
+        a:visited {
+            color: #00ff00;
+        }
+
+        a:hover {
+            color: red;
+        }
+
+        img {
+            max-width: 95%;
+            height: auto;
+            margin-top: 0;
+        }
+
+        main {
+            max-width: 1200px;
+            width: 95%;
+            margin: 0 auto;
+            padding: 30px;
+            border: 2px solid #00ff00;
+            border-radius: 20px;
+            background-color: rgba(0, 0, 0, 0.85);
+        }
+
+        h1, h2, h3 {
+            color: #00ff00;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 10px;
+        }
+
+        code {
+            background-color: #111;
+            color: #00ff00;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        pre {
+            background-color: #111;
+            border: 1px solid #00ff00;
+            border-radius: 6px;
+            padding: 16px;
+            overflow: auto;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        th, td {
+            border: 1px solid #00ff00;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #111;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .success {
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .failure {
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .warning {
+            color: #ffff00;
+            font-weight: bold;
+        }
+
+        .copy-button {
+            background-color: #000;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 20px;
+        }
+
+        .copy-button:hover {
+            background-color: #00ff00;
+            color: #000;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: column;
+            margin-top: 7px;
+            margin-bottom: 12px; 
+            width: 100%;
+        }
+
+        .button {
+            display: inline-block;
+            min-width: 75px;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid red;
+            cursor: crosshair;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-button {
+            background-color: rgba(0, 0, 0, 0.6);
+            text-decoration: none;
+            color: #00ff00;
+        }
+
+        .active-button {
+            background-color: rgba(255, 60, 0, 0.3);
+        }
+
+        .button:hover {
+            background-color: rgba(244, 153, 61, 0.6);
+            color: #ffffff;
+        }
+
+        .logo-container {
+            order: -1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media screen and (min-width: 700px) {
+            body {
+                align-items: center;
+                justify-content: flex-start;
+                margin: 0;
+                padding: 20px;
+            }
+
+            .tabs {
+                flex-direction: row; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Using (small) local models with OpenHands</h1>
+
+        <p>I have servers with 6GB GPUs that I would like to use local models to generate boilerplate code.<br>
+        The servers are powerful enough to run Aider with small local models, but OpenHands malfunctions.</p>
+
+        <p>I checked <a href="https://github.com/OpenHands/OpenHands/issues">https://github.com/OpenHands/OpenHands/issues</a> for similar issues but did not find one.</p>
+
+        <p>I suspect others have had issues with running (small) models locally.</p>
+
+        <h2>Models we've tried:</h2>
+        <ul>
+            <li>devstral:24b</li>
+            <li>deepseek-r1:14b</li>
+            <li>deepcoder:14b</li>
+            <li>mistral:7b</li>
+            <li>deepseek-coder:6.7b</li>
+            <li>wizardcoder:7b-python</li>
+            <li>qwen3:8b</li>
+            <li>qwen3-coder:30b</li>
+        </ul>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Size</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>devstral</td>
+                    <td>24b</td>
+                    <td><span class="success">✅ Works</span></td>
+                </tr>
+                <tr>
+                    <td>deepseek-r1</td>
+                    <td>14b</td>
+                    <td><span class="failure">❌ Gets stuck in loop</span></td>
+                </tr>
+                <tr>
+                    <td>deepcoder</td>
+                    <td>14b</td>
+                    <td><span class="warning">⚠️ Creates file but gets stuck</span></td>
+                </tr>
+                <tr>
+                    <td>mistral</td>
+                    <td>7b</td>
+                    <td><span class="failure">❌ Doesn't work</span></td>
+                </tr>
+                <tr>
+                    <td>deepseek-coder</td>
+                    <td>6.7b</td>
+                    <td><span class="failure">❌ Doesn't work</span></td>
+                </tr>
+                <tr>
+                    <td>wizardcoder</td>
+                    <td>7b-python</td>
+                    <td><span class="failure">❌ Doesn't work</span></td>
+                </tr>
+                <tr>
+                    <td>qwen3</td>
+                    <td>8b</td>
+                    <td><span class="warning">⚠️ Somewhat worked</span></td>
+                </tr>
+                <tr>
+                    <td>qwen3-coder</td>
+                    <td>30b</td>
+                    <td><span class="failure">❌ Doesn't work</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>The smaller models either didn't work or only somewhat worked. If I recall correctly it was qwen3:8b that somewhat worked. Being larger in size didn't necessarily mean the model worked, but of the models that did the job and didn't encounter issues, they were 14b+ ones. The primary issue I recall encountering was the models not understanding that a back and forth conversation was taking place.</p>
+
+        <p>They didn't understand:</p>
+
+        <pre>> Please continue on whatever approach you think is suitable. 
+  If you think you have solved the task, please finish the interaction.</pre>
+
+        <p>There is also the models not knowing about or having the ability to interact with local files through the agent, such as:</p>
+
+        <pre>> I'm sorry for the confusion, but as an AI model developed by OpenAI, 
+  I don't have access to a runtime environment or any specific hosts. 
+  My main function is to provide information and answer questions related 
+  to programming and computer science based on my training data.</pre>
+
+        <h2>Ollama</h2>
+
+        <pre><code>$ podman run -d \
+    --device nvidia.com/gpu=all \
+    -e OLLAMA_MODELS="/data/ollama/models" \
+    -v /opt/mm/data:/data \
+    -v /opt/ollama:/root/.ollama \
+    -p 11434:11434 \
+    --name ollama \
+    --security-opt=label=disable \
+    ollama/ollama
+$ podman exec -ti ollama ollama pull deepseek-r1:14b
+$ podman exec -ti ollama ollama pull deepseek-coder:6.7b
+$ podman exec -ti ollama ollama pull devstral:24b
+$ podman exec -ti ollama ollama pull deepcoder:14b
+$ podman exec -ti ollama ollama list
+NAME                   ID              SIZE      MODIFIED    
+deepcoder:14b          12bdda054d23    9.0 GB    19 seconds ago
+deepseek-coder:6.7b    ce298d984115    3.8 GB    4 days ago    
+devstral:24b           9bd74193e939    14 GB     4 days ago    
+deepseek-r1:14b        c333b7232bdb    9.0 GB    4 days ago</code></pre>
+
+        <h2>Headless OpenHands runs</h2>
+
+        <h3>deepseek-r1:14b</h3>
+        <p>Gets stuck in loop</p>
+
+        <pre><code>$ podman run -it \
+     --pull=always \
+     -e SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.openhands.dev/openhands/runtime:1.3-nikolaik \
+     -e SANDBOX_USER_ID=$(id -u) \
+     -e SANDBOX_VOLUMES="/opt/openhands/volume:/workspace:z" \
+     -e LLM_BASE_URL="http://localhost:11434" \
+     -e LLM_API_KEY=none \
+     -e LLM_MODEL="ollama/deepseek-r1:14b" \
+     -e LLM_TIMEOUT=2400 \
+     -e LOG_ALL_EVENTS=true \
+     -e RUN_AS_OPENHANDS=false \
+     -e SANDBOX_USE_HOST_NETWORK=true \
+     -e DEBUG=true \
+     -v /var/run/user/1000/podman/podman.sock:/var/run/docker.sock:z \
+     -v /opt/openhands/openhands:/.openhands:z \
+     -v /opt/openhands/volume:/workspace:z \
+     --network host \
+     --add-host host.docker.internal:host-gateway \
+     --name openhands-app-$(date +%Y%m%d%H%M%S) \
+     --security-opt label=disable \
+     docker.openhands.dev/openhands/openhands:1.3 \
+     python -m openhands.core.main -t "Write fizz buzz in bash"</code></pre>
+
+        <h3>deepcoder:14b</h3>
+        <p>Gets stuck in loop but does create fizzbuzz.sh</p>
+
+        <pre><code>$ podman run -it \
+     --pull=always \
+     -e SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.openhands.dev/openhands/runtime:1.3-nikolaik \
+     -e SANDBOX_USER_ID=$(id -u) \
+     -e SANDBOX_VOLUMES="/opt/openhands/volume:/workspace:z" \
+     -e LLM_BASE_URL="http://localhost:11434" \
+     -e LLM_API_KEY=none \
+     -e LLM_MODEL="ollama/deepcoder:14b" \
+     -e LLM_TIMEOUT=2400 \
+     -e LOG_ALL_EVENTS=true \
+     -e RUN_AS_OPENHANDS=false \
+     -e SANDBOX_USE_HOST_NETWORK=true \
+     -e DEBUG=true \
+     -v /var/run/user/1000/podman/podman.sock:/var/run/docker.sock:z \
+     -v /opt/openhands/openhands:/.openhands:z \
+     -v /opt/openhands/volume:/workspace:z \
+     --network host \
+     --add-host host.docker.internal:host-gateway \
+     --name openhands-app-$(date +%Y%m%d%H%M%S) \
+     --security-opt label=disable \
+     docker.openhands.dev/openhands/openhands:1.3 \
+     python -m openhands.core.main -t "Write fizz buzz in bash"</code></pre>
+
+        <h3>devstral:24b</h3>
+        <p>This works</p>
+
+        <pre><code>$ podman run -it \
+     --pull=always \
+     -e SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.openhands.dev/openhands/runtime:1.3-nikolaik \
+     -e SANDBOX_USER_ID=$(id -u) \
+     -e SANDBOX_VOLUMES="/opt/openhands/volume:/workspace:z" \
+     -e LLM_BASE_URL="http://localhost:11434" \
+     -e LLM_API_KEY=none \
+     -e LLM_MODEL="ollama/devstral:24b" \
+     -e LLM_TIMEOUT=2400 \
+     -e LOG_ALL_EVENTS=true \
+     -e RUN_AS_OPENHANDS=false \
+     -e SANDBOX_USE_HOST_NETWORK=true \
+     -e DEBUG=true \
+     -v /var/run/user/1000/podman/podman.sock:/var/run/docker.sock:z \
+     -v /opt/openhands/openhands:/.openhands:z \
+     -v /opt/openhands/volume:/workspace:z \
+     --network host \
+     --add-host host.docker.internal:host-gateway \
+     --name openhands-app-$(date +%Y%m%d%H%M%S) \
+     --security-opt label=disable \
+     docker.openhands.dev/openhands/openhands:1.3 \
+     python -m openhands.core.main -t "Write fizz buzz in bash"
+
+$ ls -Al /opt/openhands/volume/
+total 4
+drwxr-xr-x. 2 elrod elrod   6 Jan 14 19:53 .downloads
+-rwxr-xr-x. 1 elrod elrod 284 Jan 14 19:54 fizzbuzz.sh</code></pre>
+    </main>
+</body>
+</html>
